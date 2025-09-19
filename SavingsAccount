@@ -1,0 +1,94 @@
+/**
+ * The SavingsAccountDriverPM class
+ * This program will store the savings account's annual interest and balance, it will also create methods
+ *  that will calculate the withdrawal, deposit, monthly annual interest rate, the balance and the total interest Rate of the bank account
+ * 
+ * Programming Assignment Chapter 6 - 12
+ * @author Angie Tirado 
+ * @since 2/12/24
+ * @version 2.0
+ */
+public class SavingsAccount {
+    private double balance;         //the current balance in the account
+    private double interestRate;    //the interest rate in the account
+    
+    /**
+     * This method will set the balance to bal and the interestRate to intRate
+     * @param bal       the current balance of the account
+     * @param intRate   the interest rate of the account
+     */
+    public SavingsAccount(double bal, double intRate){
+        balance = bal;
+        interestRate = intRate;
+    }
+    //copy constructor
+    /**
+     * The SavingsAccount method will create a copy constructor in order to copy the balance and the interestRate
+     * @param s     the name of the SavingsAccount object
+     */
+    public SavingsAccount(SavingsAccount s){
+        balance = s.getBalance();
+        interestRate = s.getInterestRate();
+    }
+    //toString constructor
+    @Override
+    /**
+     * The toString() method will create a constructor that will override the original 
+     *  toString method and output the balance and the interestRate of the account
+     */
+    public String toString(){
+        return String.format("The balance of this account is: \n The monthly interest rate of this account is $ ", balance, interestRate);
+
+    }
+    /**
+     * The equals() method will check to see if the bank account and the 
+     *  interestRate of 2 Savings Accounts are equal to each other
+     * @param s     the SavingsAccount object created
+     * @return      true if both the Savings Accounts have the same interest rate and balance
+     */
+    public boolean equals(SavingsAccount s){
+        if(balance == s.getBalance() && interestRate == s.getInterestRate()){
+            return true;
+        }
+    }
+    
+    /**
+     * This method will calculate the withdraw amount by subtracting the amount from the total balance of the account
+     * @param amount        the amount of money that is withdrew from the total bank account balance
+     */
+    public void withdraw(double amount){
+        balance = balance - amount;
+    }
+    
+    /**
+     * This method will calculate the deposit amount by adding it to the balance of the account
+     * @param amount       the amount of money that is being added to the account
+     */
+    public void deposit(double amount){
+        balance = balance + amount;
+    }
+    
+    /**
+     * This method will calculate the monthly interest rate by dividing the annual interest rate by 12,
+     *  multiplying it to the balance, and then adding it to the balance
+     */
+    public void addInterest(){
+        balance = balance + (balance * (interestRate/12));
+    }
+    
+    /**
+     * This method will return the total balance of the bank account
+     * @return      the total balance that is left in the bank account
+     */
+    public double getBalance(){
+        return balance;
+    }
+    
+    /**
+     * This method will return the interest rate of the bank account
+     * @return      the total monthly interest rate of the bank account
+     */
+    public double getInterestRate(){
+        return interestRate;
+    }
+}
