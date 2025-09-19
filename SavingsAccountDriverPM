@@ -1,0 +1,76 @@
+/**
+ * The SavingsAccountDriverPM Class
+ * This program asks the user to enter the annual interest rate, the starting balance, 
+ *  and the number of months that have passed since the account was established, and then
+ *  it displays the ending balance, the total amount of deposits and the total amount of withdrawals, 
+ *  and the total interest earned
+ * 
+ * Programming Assignment Chapter 6 - 12
+ * @author Angie Tirado
+ * @since 2/11/24
+ * @version 2.0
+ */
+//adds the Scanner class
+import java.util.Scanner;
+public class SavingsAccountDriverPM {
+
+    public static void main(String[] args) {
+        
+        double annual;          //the accounts annual interest rate
+        double startBalance;    //the accounts starting balance
+        int numMonths = 0;      //total number of months the user has had that account
+        double deposited = 0.0; //money deposted in the account
+        //creates a new Scanner object to allow the user to input data       
+        Scanner userInput2 = new Scanner(System.in);
+        //prompts the user to enter the annual interest rate
+        System.out.println("Enter the annual interest rate");
+        //stores the user's input
+        annual = userInput2.nextDouble();
+        //prompts the user to enter the current balance of their account
+        System.out.println("Enter the current balance of your account");
+        //stores the user's input
+        startBalance = userInput2.nextDouble();
+        //prompts the user to enter the current balance of their account
+        System.out.println("Enter the number of months since you opened your account");
+        //stores the user's input
+        numMonths = userInput2.nextInt();
+        //creates a new SavingsAccount object
+        SavingsAccount savings = new SavingsAccount(startBalance, annual);
+        //creates a second SavingsAccount object
+        SavingsAccount savings2 = new SavingsAccount(savings);
+        //for loop, allows to run up to the number of months the user entered
+        for(int i = 1; i <= numMonths; i++){
+            //creates a new Scanner to allow the user to enter data
+            Scanner userInput = new Scanner(System.in);
+            //prompts the user to enter the amount they deposited
+            System.out.println("Please enter the amount deposited into the account during the " + i + " month(s)");
+            //stores the amount they deposited
+            deposited = userInput.nextDouble();
+            //calls the deposit method from the SavingsAccount class
+            savings.deposit(deposited);
+            //prompts the user to enter the amount they withdrew
+            System.out.println("Enter the amount withdrawn from the account during " + i + " month(s)");
+            //stores the withdrew amount
+            Double withdraw = userInput.nextDouble();
+            //calls the withdrew method from the SavingsAccount class
+            savings.withdraw(withdraw);
+            //calls the interest metho from the SavingsAccount class to calculate the interest
+            savings.addInterest();
+        }
+        //check to see if the savings accounts match
+        if(savings.equals(savings2)){
+            System.out.println("The savings accounts match");
+        }
+        else{
+            System.out.println("The savings accounts do not match");
+        }
+        
+        //displays the accounts balance
+        System.out.println(savings.toString());
+        //System.out.println("The balance of this account is $" + savings.getBalance());
+        //displays the accounts monthly interest rate
+        //System.out.println("The monthly interest rate of this account is $" + savings.getInterestRate());
+
+        
+    }
+}
